@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1>Payments</h1>
+
+<% if @payments.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Amount</th>
+        <th>Status</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr>
+          <td><%= payment.amount %></td>
+          <td><%= payment.status %></td>
+
+          <% unless payment.not_registered? %>
+            <td><%= link_to 'Check status', [:status, payment], method: :put %></td>
+            <% unless payment.canceled? || payment.rejected? %>
+              <td><%= link_to 'Cancel', [:cancel, payment], method: :delete, data: {confirm: "Are you sure?"} %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No payments</p>
+<% end %>
+
+<br>
+<h2>New Payment</h2>
+
+<%= render 'form' %>
