@@ -21,6 +21,11 @@
 
           <% unless payment.not_registered? %>
             <td><%= link_to 'Check status', [:status, payment], method: :put %></td>
+
+            <% if payment.delayed? %>
+              <td><%= link_to 'Confirm', [:confirm, payment], method: :put %></td>
+            <% end %>
+
             <% unless payment.canceled? || payment.rejected? %>
               <td><%= link_to 'Cancel', [:cancel, payment], method: :delete, data: {confirm: "Are you sure?"} %></td>
             <% end %>

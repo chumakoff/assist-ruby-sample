@@ -39,7 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.2)
-    assist-ruby-sdk (0.1.0)
+    assist-ruby-sdk (0.2.0)
     builder (3.2.2)
     byebug (9.0.5)
     coffee-rails (4.2.1)
@@ -174,7 +174,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  assist-ruby-sdk
+  assist-ruby-sdk (~> 0.2)
   byebug
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)

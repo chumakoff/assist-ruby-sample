@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     member do
       put :status
+      put :confirm
       delete :cancel
     end
   end

@@ -1,7 +1,7 @@
 class Payment < ApplicationRecord
   validates :amount, presence: true, numericality: {greater_than_or_equal_to: 0}
 
-  enum status: [:not_registered, :registered, :paid, :rejected, :canceled]
+  enum status: [:not_registered, :registered, :paid, :delayed, :rejected, :canceled]
 
   def register!(billnumber)
     self.billnumber = billnumber
@@ -22,6 +22,13 @@ class Payment < ApplicationRecord
     update_status! order_status.status
   end
 
+  def confirm!
+    result = Assist.confirm_order(billnumber).result
+    raise "Wrong order ID" if id != result[:ordernumber].to_i
+
+    update_status! result[:orderstate]
+  end
+
   def cancel!
     result = Assist.cancel_order(billnumber).result
     raise "Wrong order ID" if id != result[:ordernumber].to_i
@@ -34,6 +41,7 @@ class Payment < ApplicationRecord
   def update_status!(status)
     case status
     when "Approved"                    then paid!     unless paid?
+    when "Delayed"                     then delayed!  unless delayed?
     when "Declined", "Timeout"         then rejected! unless rejected?
     when "Canceled", "PartialCanceled" then canceled! unless canceled?
     end

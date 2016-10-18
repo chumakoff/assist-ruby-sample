@@ -1,24 +1,7 @@
-# README
+This sample application demonstrates how to use the ['assist-ruby-sdk' gem](https://github.com/chumakoff/assist-ecommerce-sdk-ruby) to make payments via [Assist online payment service provider](http://www.assist.ru/).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Creating payments
+  * Instance payments
+  * Delayed payments
+* Receiving status by order number
+* Canceling payments
